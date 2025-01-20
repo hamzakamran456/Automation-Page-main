@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu Button</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+        list-style: none;
+        font-family: "MuseoModerno", sans-serif;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .container {
+        max-width: 100%;
+        margin-left: 1.875em;
+        margin-right: 1.875em;
+      }
+
+      header {
+        height: 105px;
+        width: 100%;
+      }
+
+      .nav__main {
+        padding-top: 24px;
+        background-color: #fff;
+        /* box-shadow: 0px 2px 3px rgb(0 0 0 / 5%);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        width: 100%; */
+      }
+
+      .nav__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav__wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+
+      .nav__left {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      .logo img {
+        width: 165px;
+      }
+
+      .logo__mobile {
+        display: none;
+      }
+
+      .nav__menu {
+        padding-left: 30px;
+        margin-bottom: -22px;
+      }
+
+      .nav__menu ul {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      .nav__link {
+        border-bottom: 3px solid transparent;
+        padding: 12px 15px 36px;
+        font-family: "MuseoModerno";
+        font-size: 15px;
+        line-height: 22px;
+        font-weight: 600;
+        color: #333333;
+        display: inline-block;
+        transition: all ease-in-out 0.4s;
+      }
+
+      .nav__link:hover {
+        color: #ff5a10;
+        border-bottom: 3px solid #ff5a10;
+      }
+
+      .nav__right {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: -6px;
+      }
+
+      .icon__wrap {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        column-gap: 30px;
+      }
+
+      .icon__img {
+        width: 24px;
+        height: 24px;
+        filter: grayscale(100%);
+        transition: all ease-in-out 0.4s;
+      }
+
+      .icon__img:hover {
+        filter: grayscale(0%);
+      }
+
+      .request__btn {
+        padding: 8px 32px;
+        font-family: "MuseoModerno";
+        font-size: 15px;
+        line-height: 24px;
+        font-weight: 600;
+        color: #fff;
+        background-color: #ff5a10;
+        border-radius: 100px;
+        margin-left: 30px;
+        border: 1px solid transparent;
+        transition: all ease-in-out 0.4s;
+      }
+
+      .request__btn:hover {
+        color: #ff5a10;
+        background-color: #fff;
+        border: 1px solid #ff5a10;
+      }
+
+      #ham {
+        color: #a77a33;
+      }
+
+      .navbar {
+        background-color: #333;
+        width: 25%;
+        height: 100vh;
+        display: none;
+      }
+
+      .navbar li:hover {
+        cursor: pointer;
+      }
+
+      .navbar li a {
+        color: #d3e3e3;
+        text-decoration: none;
+        font-family: "Raleway", sans-serif;
+        font-size: 1.6em;
+        transition: all 0.5s;
+      }
+
+      .navbar li:hover {
+        cursor: pointer;
+        background-color: #ce3939;
+        letter-spacing: 10px;
+      }
+
+      .hamburger {
+        display: none;
+        margin: 0;
+        /* margin-left: 15px; */
+        padding: 0;
+        float: left;
+        transition: opacity 0.3s;
+      }
+
+      .hamburger:hover {
+        cursor: pointer;
+        opacity: 0.5;
+      }
+
+      .hamburger .line {
+        width: 32px;
+        height: 5px;
+        background: rgb(236, 66, 66);
+        margin: 6px auto;
+        transition: all 0.3s ease-in-out;
+        border-radius: 5px;
+      }
+
+      .hamburger .line:nth-child(1) {
+        background-color: rgb(255,90,16);
+      }
+
+      .hamburger .line:nth-child(2) {
+        background-color: rgb(255,90,16);
+      }
+
+      .hamburger .line:nth-child(3) {
+        background-color: rgb(255,90,16);
+      }
+
+      .hamburger.isactive .line:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.isactive .line:nth-child(1) {
+        transform: translateY(13px) rotate(45deg);
+      }
+
+      .hamburger.isactive .line:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+      }
+
+      .navbar {
+        transition: all 2s ease-in-out;
+      }
+
+      .navbar.active {
+        display: block;
+        animation: fade 0.5s;
+      }
+
+      @keyframes fade {
+        from {
+          transform: translateX(-200px);
+          opacity: 0;
+        }
+
+        to {
+          transform: translateX(0px);
+          opacity: 1;
+        }
+      }
+
+      @media screen and (max-width: 1360px) {
+        .h1 h1 {
+          font-size: 3em;
+          left: 35%;
+        }
+
+        .navbar {
+          width: 30%;
+        }
+
+        .navbar ul {
+          padding-left: 0%;
+        }
+
+        .navbar li {
+          padding: 3% 0;
+        }
+
+        .navbar li a {
+          font-size: 1.2em;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .hamburger {
+          float: right;
+        }
+
+        .navbar {
+          background-color: #333;
+          width: 100%;
+          height: 45vh;
+          display: none;
+        }
+
+        .navbar ul {
+          overflow: hidden;
+          list-style-type: none;
+          padding-top: 25%;
+          padding-left: 0%;
+          padding-right: 3%;
+          padding-bottom: 3%;
+          text-align: center;
+          margin: 0;
+        }
+
+        .navbar li {
+          display: block;
+          margin: 0;
+          padding: 25px 20px;
+          width: 100%;
+          transition: background-color 0.5s;
+        }
+
+        .navbar li:hover {
+          cursor: pointer;
+          background-color: rgb(255, 90, 16);
+        }
+
+        .navbar li a {
+          color: #d3e3e3;
+          text-decoration: none;
+          padding: 14px 16px;
+          font-family: "Raleway", sans-serif;
+          font-size: 28px;
+          transition: all 1s;
+        }
+
+        .navbar li:hover {
+          cursor: pointer;
+          background-color: rgb(255, 90, 16);
+          letter-spacing: 0px;
+        }
+      }
+
+      @media screen and (max-width: 992px) {
+        .navbar {
+          background-color: white;
+          width: 100%;
+          height: 100vh;
+          display: none;
+        }
+
+        .hamburger {
+          display: none;
+          margin-left: auto;
+          margin-right: 0px;
+        }
+
+        .container {
+            margin-left: 0.93em;
+            margin-right: 0.93em;
+        }
+
+        .nav__menu {
+          display: block;
+        }
+
+        .nav__right {
+          margin-left: auto;
+          display: block;
+        }
+      }
+      @media screen and (max-width: 767px){
+        
+        .hamburger{
+            display: block;
+        }
+        .nav__main{
+            padding-top: 12px;
+        }
+        .nav__menu {
+          display: none;
+        }
+
+        .nav__right {
+          margin-left: auto;
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="nav__main">
+        <div class="container">
+          <div class="nav__inner">
+            <a href="#">
+              <div class="logo__mobile"><img src="img/logo-aa-new.svg" /></div>
+            </a>
+            <div class="nav__wrap">
+              <div class="nav__left">
+                <a href="#">
+                  <div class="logo"><img src="img/logo-aa-new.svg" /></div>
+                </a>
+                <div class="nav__menu">
+                  <ul>
+                    <li><a href="#" class="nav__link">Product</a></li>
+                    <li><a href="#" class="nav__link">Solution</a></li>
+                    <li><a href="#" class="nav__link">Resources</a></li>
+                    <li><a href="#" class="nav__link">Customers</a></li>
+                    <li><a href="#" class="nav__link">Company</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="nav__right">
+                <div class="icon__wrap">
+                  <a href="#">
+                    <div class="icon__img">
+                      <img src="img/header-search-icon-active.svg" />
+                    </div>
+                  </a>
+                  <a href="#">
+                    <div class="icon__img">
+                      <img src="img/header-support-new-icon_en.svg" />
+                    </div>
+                  </a>
+                  <a href="#">
+                    <div class="icon__img">
+                      <img src="img/header-login-icon-active (1).svg" />
+                    </div>
+                  </a>
+                  <a href="#">
+                    <div class="icon__img">
+                      <img src="img/lang-globe-icon-new.svg" />
+                    </div>
+                  </a>
+                </div>
+                <a href="#" class="request__btn">Request Demo</a>
+              </div>
+              <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hamburger-main">
+        <menu class="navbar">
+          <ul>
+            <li>
+              <a href="#"><b>Product</b></a>
+            </li>
+            <li>
+              <a href="#"><b>Solution</b></a>
+            </li>
+            <li>
+              <a href="#"><b>Resources</b></a>
+            </li>
+            <li>
+              <a href="#"><b>Customers</b></a>
+            </li>
+            <li>
+              <a href="#"><b>Company</b></a>
+            </li>
+          </ul>
+        </menu>
+      </div>
+    </header>
+    <script>
+      let hamburger = document.querySelector(".hamburger");
+      let menu = document.querySelector(".navbar");
+      let bod = document.querySelector(".container");
+
+      hamburger.addEventListener("click", function () {
+        hamburger.classList.toggle("isactive");
+        menu.classList.toggle("active");
+      });
+    </script>
+  </body>
+</html>
